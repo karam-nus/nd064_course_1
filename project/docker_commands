@@ -1,11 +1,49 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build -t techtrends .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+docker run -d -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs 4b7d6c50985c
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+2024-08-02 14:01:32  * Serving Flask app 'app' (lazy loading)
+2024-08-02 14:01:32  * Environment: production
+2024-08-02 14:01:32    WARNING: This is a development server. Do not use it in a production deployment.
+2024-08-02 14:01:32    Use a production WSGI server instead.
+2024-08-02 14:01:32  * Debug mode: off
+2024-08-02 14:01:32 WARNING:werkzeug:2024-08-02 06:01:32,907,  * Running on all addresses.
+2024-08-02 14:01:32    WARNING: This is a development server. Do not use it in a production deployment.
+2024-08-02 14:01:32 INFO:werkzeug:2024-08-02 06:01:32,907,  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+2024-08-02 14:02:21 INFO:werkzeug:2024-08-02 06:02:21,666, 192.168.65.1 - - [02/Aug/2024 06:02:21] "GET / HTTP/1.1" 200 -
+2024-08-02 14:02:21 INFO:werkzeug:2024-08-02 06:02:21,694, 192.168.65.1 - - [02/Aug/2024 06:02:21] "GET /static/css/main.css HTTP/1.1" 200 -
+2024-08-02 14:02:21 INFO:werkzeug:2024-08-02 06:02:21,914, 192.168.65.1 - - [02/Aug/2024 06:02:21] "GET /favicon.ico HTTP/1.1" 404 -
+2024-08-02 14:03:16 INFO:app:2024-08-02 06:03:16,377, Article "2020 CNCF Annual Report" retrieved!
+2024-08-02 14:03:16 INFO:werkzeug:2024-08-02 06:03:16,386, 192.168.65.1 - - [02/Aug/2024 06:03:16] "GET /1 HTTP/1.1" 200 -
+2024-08-02 14:03:16 INFO:werkzeug:2024-08-02 06:03:16,411, 192.168.65.1 - - [02/Aug/2024 06:03:16] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:03:20 INFO:app:2024-08-02 06:03:20,879, "About Us" page is retrieved!
+2024-08-02 14:03:20 INFO:werkzeug:2024-08-02 06:03:20,886, 192.168.65.1 - - [02/Aug/2024 06:03:20] "GET /about HTTP/1.1" 200 -
+2024-08-02 14:03:20 INFO:werkzeug:2024-08-02 06:03:20,916, 192.168.65.1 - - [02/Aug/2024 06:03:20] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:03:23 INFO:app:2024-08-02 06:03:23,850, Article "Kubernetes Certification" retrieved!
+2024-08-02 14:03:23 INFO:werkzeug:2024-08-02 06:03:23,850, 192.168.65.1 - - [02/Aug/2024 06:03:23] "GET /6 HTTP/1.1" 200 -
+2024-08-02 14:03:23 INFO:werkzeug:2024-08-02 06:03:23,878, 192.168.65.1 - - [02/Aug/2024 06:03:23] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:03:25 INFO:app:2024-08-02 06:03:25,888, Article "CNCF Cloud Native Definition v1.0" retrieved!
+2024-08-02 14:03:25 INFO:werkzeug:2024-08-02 06:03:25,889, 192.168.65.1 - - [02/Aug/2024 06:03:25] "GET /5 HTTP/1.1" 200 -
+2024-08-02 14:03:25 INFO:werkzeug:2024-08-02 06:03:25,924, 192.168.65.1 - - [02/Aug/2024 06:03:25] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:03:28 INFO:app:2024-08-02 06:03:28,396, Article "2020 CNCF Annual Report" retrieved!
+2024-08-02 14:03:28 INFO:werkzeug:2024-08-02 06:03:28,398, 192.168.65.1 - - [02/Aug/2024 06:03:28] "GET /1 HTTP/1.1" 200 -
+2024-08-02 14:03:28 INFO:werkzeug:2024-08-02 06:03:28,423, 192.168.65.1 - - [02/Aug/2024 06:03:28] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:05:01 INFO:werkzeug:2024-08-02 06:05:01,318, 192.168.65.1 - - [02/Aug/2024 06:05:01] "GET /create HTTP/1.1" 200 -
+2024-08-02 14:05:01 INFO:werkzeug:2024-08-02 06:05:01,344, 192.168.65.1 - - [02/Aug/2024 06:05:01] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:05:31 INFO:app:2024-08-02 06:05:31,498, New article "Test Post" created!
+2024-08-02 14:05:31 INFO:werkzeug:2024-08-02 06:05:31,499, 192.168.65.1 - - [02/Aug/2024 06:05:31] "POST /create HTTP/1.1" 302 -
+2024-08-02 14:05:31 INFO:werkzeug:2024-08-02 06:05:31,582, 192.168.65.1 - - [02/Aug/2024 06:05:31] "GET / HTTP/1.1" 200 -
+2024-08-02 14:05:31 INFO:werkzeug:2024-08-02 06:05:31,665, 192.168.65.1 - - [02/Aug/2024 06:05:31] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:05:46 INFO:app:2024-08-02 06:05:46,907, "About Us" page is retrieved!
+2024-08-02 14:05:46 INFO:werkzeug:2024-08-02 06:05:46,910, 192.168.65.1 - - [02/Aug/2024 06:05:46] "GET /about HTTP/1.1" 200 -
+2024-08-02 14:05:46 INFO:werkzeug:2024-08-02 06:05:46,948, 192.168.65.1 - - [02/Aug/2024 06:05:46] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:08:32 INFO:werkzeug:2024-08-02 06:08:32,386, 192.168.65.1 - - [02/Aug/2024 06:08:32] "GET / HTTP/1.1" 200 -
+2024-08-02 14:08:32 INFO:werkzeug:2024-08-02 06:08:32,410, 192.168.65.1 - - [02/Aug/2024 06:08:32] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:08:32 INFO:werkzeug:2024-08-02 06:08:32,446, 192.168.65.1 - - [02/Aug/2024 06:08:32] "GET /static/css/main.css HTTP/1.1" 304 -
+2024-08-02 14:08:34 INFO:werkzeug:2024-08-02 06:08:34,516, 192.168.65.1 - - [02/Aug/2024 06:08:34] "GET /metrics HTTP/1.1" 200 -

@@ -1,4 +1,5 @@
 import sqlite3
+import logging
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
@@ -8,6 +9,7 @@ from werkzeug.exceptions import abort
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    app.db_connection_count += 1
     return connection
 
 # Function to get a post using its ID
@@ -16,13 +18,18 @@ def get_post(post_id):
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
                         (post_id,)).fetchone()
     connection.close()
+    if post != None:
+        app.logger.info('Article "{}" retrieved!'.format(post[2]))
+    else:
+        app.logger.info('A non-existing "{}" article is accessed!'.format(post_id))
     return post
 
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
+app.db_connection_count = 0
 
-# Define the main route of the web application 
+# Define the main route of the web application
 @app.route('/')
 def index():
     connection = get_db_connection()
@@ -30,7 +37,7 @@ def index():
     connection.close()
     return render_template('index.html', posts=posts)
 
-# Define how each individual article is rendered 
+# Define how each individual article is rendered
 # If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
@@ -43,9 +50,10 @@ def post(post_id):
 # Define the About Us page
 @app.route('/about')
 def about():
+    app.logger.info('"About Us" page is retrieved!')
     return render_template('about.html')
 
-# Define the post creation functionality 
+# Define the post creation functionality
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
@@ -61,10 +69,39 @@ def create():
             connection.commit()
             connection.close()
 
+            app.logger.info('New article "{}" created!'.format(title))
             return redirect(url_for('index'))
 
     return render_template('create.html')
 
+@app.route('/healthz')
+def healthcheck():
+    response = app.response_class(
+            response=json.dumps({"result":"OK - healthy"}),
+            status=200,
+            mimetype='application/json'
+    )
+    return response
+
+def get_post_count():
+    connection = get_db_connection()
+    posts = connection.execute('SELECT * FROM posts').fetchall()
+    connection.close()
+    return len(posts)
+
+@app.route('/metrics')
+def metrics():
+    response = app.response_class(
+            response=json.dumps({"db_connection_count": app.db_connection_count, "post_count": get_post_count()}),
+            status=200,
+            mimetype='application/json'
+    )
+    return response
+
 # start the application on port 3111
 if __name__ == "__main__":
+   logging.basicConfig(level=logging.DEBUG,
+                       handlers=[logging.FileHandler("app.log"),
+                              logging.StreamHandler()],
+                        format= '%(levelname)s:%(name)s:%(asctime)s, %(message)s')
    app.run(host='0.0.0.0', port='3111')
